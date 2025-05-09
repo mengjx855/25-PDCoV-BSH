@@ -1,0 +1,551 @@
+name	has	mmu	bta	ssu	category
+map00010	hsa00010	mmu00010	bta00010	ssu00010	Metabolism
+map00020	hsa00020	mmu00020	bta00020	ssu00020	Metabolism
+map00030	hsa00030	mmu00030	bta00030	ssu00030	Metabolism
+map00040	hsa00040	mmu00040	bta00040	ssu00040	Metabolism
+map00051	hsa00051	mmu00051	bta00051	ssu00051	Metabolism
+map00052	hsa00052	mmu00052	bta00052	ssu00052	Metabolism
+map00053	hsa00053	mmu00053	bta00053	ssu00053	Metabolism
+map00500	hsa00500	mmu00500	bta00500	ssu00500	Metabolism
+map00520	hsa00520	mmu00520	bta00520	ssu00520	Metabolism
+map00620	hsa00620	mmu00620	bta00620	ssu00620	Metabolism
+map00630	hsa00630	mmu00630	bta00630	ssu00630	Metabolism
+map00640	hsa00640	mmu00640	bta00640	ssu00640	Metabolism
+map00650	hsa00650	mmu00650	bta00650	ssu00650	Metabolism
+map00660	hsa00660	mmu00660	bta00660	ssu00660	Metabolism
+map00562	hsa00562	mmu00562	bta00562	ssu00562	Metabolism
+map00190	hsa00190	mmu00190	bta00190	ssu00190	Metabolism
+map00195	hsa00195	mmu00195	bta00195	ssu00195	Metabolism
+map00196	hsa00196	mmu00196	bta00196	ssu00196	Metabolism
+map00710	hsa00710	mmu00710	bta00710	ssu00710	Metabolism
+map00720	hsa00720	mmu00720	bta00720	ssu00720	Metabolism
+map00680	hsa00680	mmu00680	bta00680	ssu00680	Metabolism
+map00910	hsa00910	mmu00910	bta00910	ssu00910	Metabolism
+map00920	hsa00920	mmu00920	bta00920	ssu00920	Metabolism
+map00061	hsa00061	mmu00061	bta00061	ssu00061	Metabolism
+map00062	hsa00062	mmu00062	bta00062	ssu00062	Metabolism
+map00071	hsa00071	mmu00071	bta00071	ssu00071	Metabolism
+map00073	hsa00073	mmu00073	bta00073	ssu00073	Metabolism
+map00100	hsa00100	mmu00100	bta00100	ssu00100	Metabolism
+map00120	hsa00120	mmu00120	bta00120	ssu00120	Metabolism
+map00121	hsa00121	mmu00121	bta00121	ssu00121	Metabolism
+map00140	hsa00140	mmu00140	bta00140	ssu00140	Metabolism
+map00561	hsa00561	mmu00561	bta00561	ssu00561	Metabolism
+map00564	hsa00564	mmu00564	bta00564	ssu00564	Metabolism
+map00565	hsa00565	mmu00565	bta00565	ssu00565	Metabolism
+map00600	hsa00600	mmu00600	bta00600	ssu00600	Metabolism
+map00590	hsa00590	mmu00590	bta00590	ssu00590	Metabolism
+map00591	hsa00591	mmu00591	bta00591	ssu00591	Metabolism
+map00592	hsa00592	mmu00592	bta00592	ssu00592	Metabolism
+map01040	hsa01040	mmu01040	bta01040	ssu01040	Metabolism
+map00230	hsa00230	mmu00230	bta00230	ssu00230	Metabolism
+map00240	hsa00240	mmu00240	bta00240	ssu00240	Metabolism
+map00250	hsa00250	mmu00250	bta00250	ssu00250	Metabolism
+map00260	hsa00260	mmu00260	bta00260	ssu00260	Metabolism
+map00270	hsa00270	mmu00270	bta00270	ssu00270	Metabolism
+map00280	hsa00280	mmu00280	bta00280	ssu00280	Metabolism
+map00290	hsa00290	mmu00290	bta00290	ssu00290	Metabolism
+map00300	hsa00300	mmu00300	bta00300	ssu00300	Metabolism
+map00310	hsa00310	mmu00310	bta00310	ssu00310	Metabolism
+map00220	hsa00220	mmu00220	bta00220	ssu00220	Metabolism
+map00330	hsa00330	mmu00330	bta00330	ssu00330	Metabolism
+map00340	hsa00340	mmu00340	bta00340	ssu00340	Metabolism
+map00350	hsa00350	mmu00350	bta00350	ssu00350	Metabolism
+map00360	hsa00360	mmu00360	bta00360	ssu00360	Metabolism
+map00380	hsa00380	mmu00380	bta00380	ssu00380	Metabolism
+map00400	hsa00400	mmu00400	bta00400	ssu00400	Metabolism
+map00410	hsa00410	mmu00410	bta00410	ssu00410	Metabolism
+map00430	hsa00430	mmu00430	bta00430	ssu00430	Metabolism
+map00440	hsa00440	mmu00440	bta00440	ssu00440	Metabolism
+map00450	hsa00450	mmu00450	bta00450	ssu00450	Metabolism
+map00460	hsa00460	mmu00460	bta00460	ssu00460	Metabolism
+map00470	hsa00470	mmu00470	bta00470	ssu00470	Metabolism
+map00480	hsa00480	mmu00480	bta00480	ssu00480	Metabolism
+map00510	hsa00510	mmu00510	bta00510	ssu00510	Metabolism
+map00513	hsa00513	mmu00513	bta00513	ssu00513	Metabolism
+map00512	hsa00512	mmu00512	bta00512	ssu00512	Metabolism
+map00515	hsa00515	mmu00515	bta00515	ssu00515	Metabolism
+map00514	hsa00514	mmu00514	bta00514	ssu00514	Metabolism
+map00532	hsa00532	mmu00532	bta00532	ssu00532	Metabolism
+map00534	hsa00534	mmu00534	bta00534	ssu00534	Metabolism
+map00533	hsa00533	mmu00533	bta00533	ssu00533	Metabolism
+map00531	hsa00531	mmu00531	bta00531	ssu00531	Metabolism
+map00563	hsa00563	mmu00563	bta00563	ssu00563	Metabolism
+map00601	hsa00601	mmu00601	bta00601	ssu00601	Metabolism
+map00603	hsa00603	mmu00603	bta00603	ssu00603	Metabolism
+map00604	hsa00604	mmu00604	bta00604	ssu00604	Metabolism
+map00511	hsa00511	mmu00511	bta00511	ssu00511	Metabolism
+map00540	hsa00540	mmu00540	bta00540	ssu00540	Metabolism
+map00542	hsa00542	mmu00542	bta00542	ssu00542	Metabolism
+map00541	hsa00541	mmu00541	bta00541	ssu00541	Metabolism
+map00550	hsa00550	mmu00550	bta00550	ssu00550	Metabolism
+map00552	hsa00552	mmu00552	bta00552	ssu00552	Metabolism
+map00571	hsa00571	mmu00571	bta00571	ssu00571	Metabolism
+map00572	hsa00572	mmu00572	bta00572	ssu00572	Metabolism
+map00543	hsa00543	mmu00543	bta00543	ssu00543	Metabolism
+map00730	hsa00730	mmu00730	bta00730	ssu00730	Metabolism
+map00740	hsa00740	mmu00740	bta00740	ssu00740	Metabolism
+map00750	hsa00750	mmu00750	bta00750	ssu00750	Metabolism
+map00760	hsa00760	mmu00760	bta00760	ssu00760	Metabolism
+map00770	hsa00770	mmu00770	bta00770	ssu00770	Metabolism
+map00780	hsa00780	mmu00780	bta00780	ssu00780	Metabolism
+map00785	hsa00785	mmu00785	bta00785	ssu00785	Metabolism
+map00790	hsa00790	mmu00790	bta00790	ssu00790	Metabolism
+map00670	hsa00670	mmu00670	bta00670	ssu00670	Metabolism
+map00830	hsa00830	mmu00830	bta00830	ssu00830	Metabolism
+map00860	hsa00860	mmu00860	bta00860	ssu00860	Metabolism
+map00130	hsa00130	mmu00130	bta00130	ssu00130	Metabolism
+map00900	hsa00900	mmu00900	bta00900	ssu00900	Metabolism
+map00902	hsa00902	mmu00902	bta00902	ssu00902	Metabolism
+map00909	hsa00909	mmu00909	bta00909	ssu00909	Metabolism
+map00904	hsa00904	mmu00904	bta00904	ssu00904	Metabolism
+map00906	hsa00906	mmu00906	bta00906	ssu00906	Metabolism
+map00905	hsa00905	mmu00905	bta00905	ssu00905	Metabolism
+map00981	hsa00981	mmu00981	bta00981	ssu00981	Metabolism
+map00908	hsa00908	mmu00908	bta00908	ssu00908	Metabolism
+map00903	hsa00903	mmu00903	bta00903	ssu00903	Metabolism
+map00907	hsa00907	mmu00907	bta00907	ssu00907	Metabolism
+map01052	hsa01052	mmu01052	bta01052	ssu01052	Metabolism
+map00522	hsa00522	mmu00522	bta00522	ssu00522	Metabolism
+map01051	hsa01051	mmu01051	bta01051	ssu01051	Metabolism
+map01059	hsa01059	mmu01059	bta01059	ssu01059	Metabolism
+map01056	hsa01056	mmu01056	bta01056	ssu01056	Metabolism
+map01057	hsa01057	mmu01057	bta01057	ssu01057	Metabolism
+map00253	hsa00253	mmu00253	bta00253	ssu00253	Metabolism
+map00523	hsa00523	mmu00523	bta00523	ssu00523	Metabolism
+map01054	hsa01054	mmu01054	bta01054	ssu01054	Metabolism
+map01053	hsa01053	mmu01053	bta01053	ssu01053	Metabolism
+map01055	hsa01055	mmu01055	bta01055	ssu01055	Metabolism
+map00940	hsa00940	mmu00940	bta00940	ssu00940	Metabolism
+map00945	hsa00945	mmu00945	bta00945	ssu00945	Metabolism
+map00941	hsa00941	mmu00941	bta00941	ssu00941	Metabolism
+map00944	hsa00944	mmu00944	bta00944	ssu00944	Metabolism
+map00942	hsa00942	mmu00942	bta00942	ssu00942	Metabolism
+map00943	hsa00943	mmu00943	bta00943	ssu00943	Metabolism
+map00946	hsa00946	mmu00946	bta00946	ssu00946	Metabolism
+map00901	hsa00901	mmu00901	bta00901	ssu00901	Metabolism
+map00403	hsa00403	mmu00403	bta00403	ssu00403	Metabolism
+map00950	hsa00950	mmu00950	bta00950	ssu00950	Metabolism
+map00960	hsa00960	mmu00960	bta00960	ssu00960	Metabolism
+map00996	hsa00996	mmu00996	bta00996	ssu00996	Metabolism
+map00232	hsa00232	mmu00232	bta00232	ssu00232	Metabolism
+map00965	hsa00965	mmu00965	bta00965	ssu00965	Metabolism
+map00966	hsa00966	mmu00966	bta00966	ssu00966	Metabolism
+map00402	hsa00402	mmu00402	bta00402	ssu00402	Metabolism
+map00311	hsa00311	mmu00311	bta00311	ssu00311	Metabolism
+map00332	hsa00332	mmu00332	bta00332	ssu00332	Metabolism
+map00261	hsa00261	mmu00261	bta00261	ssu00261	Metabolism
+map00331	hsa00331	mmu00331	bta00331	ssu00331	Metabolism
+map00521	hsa00521	mmu00521	bta00521	ssu00521	Metabolism
+map00524	hsa00524	mmu00524	bta00524	ssu00524	Metabolism
+map00525	hsa00525	mmu00525	bta00525	ssu00525	Metabolism
+map00401	hsa00401	mmu00401	bta00401	ssu00401	Metabolism
+map00404	hsa00404	mmu00404	bta00404	ssu00404	Metabolism
+map00405	hsa00405	mmu00405	bta00405	ssu00405	Metabolism
+map00333	hsa00333	mmu00333	bta00333	ssu00333	Metabolism
+map00254	hsa00254	mmu00254	bta00254	ssu00254	Metabolism
+map00998	hsa00998	mmu00998	bta00998	ssu00998	Metabolism
+map00999	hsa00999	mmu00999	bta00999	ssu00999	Metabolism
+map00997	hsa00997	mmu00997	bta00997	ssu00997	Metabolism
+map00362	hsa00362	mmu00362	bta00362	ssu00362	Metabolism
+map00627	hsa00627	mmu00627	bta00627	ssu00627	Metabolism
+map00364	hsa00364	mmu00364	bta00364	ssu00364	Metabolism
+map00625	hsa00625	mmu00625	bta00625	ssu00625	Metabolism
+map00361	hsa00361	mmu00361	bta00361	ssu00361	Metabolism
+map00623	hsa00623	mmu00623	bta00623	ssu00623	Metabolism
+map00622	hsa00622	mmu00622	bta00622	ssu00622	Metabolism
+map00633	hsa00633	mmu00633	bta00633	ssu00633	Metabolism
+map00642	hsa00642	mmu00642	bta00642	ssu00642	Metabolism
+map00643	hsa00643	mmu00643	bta00643	ssu00643	Metabolism
+map00791	hsa00791	mmu00791	bta00791	ssu00791	Metabolism
+map00930	hsa00930	mmu00930	bta00930	ssu00930	Metabolism
+map00363	hsa00363	mmu00363	bta00363	ssu00363	Metabolism
+map00621	hsa00621	mmu00621	bta00621	ssu00621	Metabolism
+map00626	hsa00626	mmu00626	bta00626	ssu00626	Metabolism
+map00624	hsa00624	mmu00624	bta00624	ssu00624	Metabolism
+map00365	hsa00365	mmu00365	bta00365	ssu00365	Metabolism
+map00984	hsa00984	mmu00984	bta00984	ssu00984	Metabolism
+map00980	hsa00980	mmu00980	bta00980	ssu00980	Metabolism
+map00982	hsa00982	mmu00982	bta00982	ssu00982	Metabolism
+map00983	hsa00983	mmu00983	bta00983	ssu00983	Metabolism
+map09113	hsa09113	mmu09113	bta09113	ssu09113	Metabolism
+map03020	hsa03020	mmu03020	bta03020	ssu03020	Genetic Information Processing
+map03022	hsa03022	mmu03022	bta03022	ssu03022	Genetic Information Processing
+map03040	hsa03040	mmu03040	bta03040	ssu03040	Genetic Information Processing
+map03010	hsa03010	mmu03010	bta03010	ssu03010	Genetic Information Processing
+map00970	hsa00970	mmu00970	bta00970	ssu00970	Genetic Information Processing
+map03013	hsa03013	mmu03013	bta03013	ssu03013	Genetic Information Processing
+map03015	hsa03015	mmu03015	bta03015	ssu03015	Genetic Information Processing
+map03008	hsa03008	mmu03008	bta03008	ssu03008	Genetic Information Processing
+map03060	hsa03060	mmu03060	bta03060	ssu03060	Genetic Information Processing
+map04141	hsa04141	mmu04141	bta04141	ssu04141	Genetic Information Processing
+map04130	hsa04130	mmu04130	bta04130	ssu04130	Genetic Information Processing
+map04120	hsa04120	mmu04120	bta04120	ssu04120	Genetic Information Processing
+map04122	hsa04122	mmu04122	bta04122	ssu04122	Genetic Information Processing
+map03050	hsa03050	mmu03050	bta03050	ssu03050	Genetic Information Processing
+map03018	hsa03018	mmu03018	bta03018	ssu03018	Genetic Information Processing
+map03030	hsa03030	mmu03030	bta03030	ssu03030	Genetic Information Processing
+map03410	hsa03410	mmu03410	bta03410	ssu03410	Genetic Information Processing
+map03420	hsa03420	mmu03420	bta03420	ssu03420	Genetic Information Processing
+map03430	hsa03430	mmu03430	bta03430	ssu03430	Genetic Information Processing
+map03440	hsa03440	mmu03440	bta03440	ssu03440	Genetic Information Processing
+map03450	hsa03450	mmu03450	bta03450	ssu03450	Genetic Information Processing
+map03460	hsa03460	mmu03460	bta03460	ssu03460	Genetic Information Processing
+map03082	hsa03082	mmu03082	bta03082	ssu03082	Genetic Information Processing
+map03083	hsa03083	mmu03083	bta03083	ssu03083	Genetic Information Processing
+map03230	hsa03230	mmu03230	bta03230	ssu03230	Genetic Information Processing
+map03240	hsa03240	mmu03240	bta03240	ssu03240	Genetic Information Processing
+map03250	hsa03250	mmu03250	bta03250	ssu03250	Genetic Information Processing
+map03260	hsa03260	mmu03260	bta03260	ssu03260	Genetic Information Processing
+map03262	hsa03262	mmu03262	bta03262	ssu03262	Genetic Information Processing
+map03261	hsa03261	mmu03261	bta03261	ssu03261	Genetic Information Processing
+map03263	hsa03263	mmu03263	bta03263	ssu03263	Genetic Information Processing
+map03264	hsa03264	mmu03264	bta03264	ssu03264	Genetic Information Processing
+map03265	hsa03265	mmu03265	bta03265	ssu03265	Genetic Information Processing
+map03266	hsa03266	mmu03266	bta03266	ssu03266	Genetic Information Processing
+map03268	hsa03268	mmu03268	bta03268	ssu03268	Genetic Information Processing
+map03267	hsa03267	mmu03267	bta03267	ssu03267	Genetic Information Processing
+map02010	hsa02010	mmu02010	bta02010	ssu02010	Environmental Information Processing
+map02060	hsa02060	mmu02060	bta02060	ssu02060	Environmental Information Processing
+map03070	hsa03070	mmu03070	bta03070	ssu03070	Environmental Information Processing
+map02020	hsa02020	mmu02020	bta02020	ssu02020	Environmental Information Processing
+map04010	hsa04010	mmu04010	bta04010	ssu04010	Environmental Information Processing
+map04013	hsa04013	mmu04013	bta04013	ssu04013	Environmental Information Processing
+map04016	hsa04016	mmu04016	bta04016	ssu04016	Environmental Information Processing
+map04011	hsa04011	mmu04011	bta04011	ssu04011	Environmental Information Processing
+map04012	hsa04012	mmu04012	bta04012	ssu04012	Environmental Information Processing
+map04014	hsa04014	mmu04014	bta04014	ssu04014	Environmental Information Processing
+map04015	hsa04015	mmu04015	bta04015	ssu04015	Environmental Information Processing
+map04310	hsa04310	mmu04310	bta04310	ssu04310	Environmental Information Processing
+map04330	hsa04330	mmu04330	bta04330	ssu04330	Environmental Information Processing
+map04340	hsa04340	mmu04340	bta04340	ssu04340	Environmental Information Processing
+map04341	hsa04341	mmu04341	bta04341	ssu04341	Environmental Information Processing
+map04350	hsa04350	mmu04350	bta04350	ssu04350	Environmental Information Processing
+map04390	hsa04390	mmu04390	bta04390	ssu04390	Environmental Information Processing
+map04391	hsa04391	mmu04391	bta04391	ssu04391	Environmental Information Processing
+map04392	hsa04392	mmu04392	bta04392	ssu04392	Environmental Information Processing
+map04370	hsa04370	mmu04370	bta04370	ssu04370	Environmental Information Processing
+map04371	hsa04371	mmu04371	bta04371	ssu04371	Environmental Information Processing
+map04630	hsa04630	mmu04630	bta04630	ssu04630	Environmental Information Processing
+map04064	hsa04064	mmu04064	bta04064	ssu04064	Environmental Information Processing
+map04668	hsa04668	mmu04668	bta04668	ssu04668	Environmental Information Processing
+map04066	hsa04066	mmu04066	bta04066	ssu04066	Environmental Information Processing
+map04068	hsa04068	mmu04068	bta04068	ssu04068	Environmental Information Processing
+map04020	hsa04020	mmu04020	bta04020	ssu04020	Environmental Information Processing
+map04070	hsa04070	mmu04070	bta04070	ssu04070	Environmental Information Processing
+map04072	hsa04072	mmu04072	bta04072	ssu04072	Environmental Information Processing
+map04071	hsa04071	mmu04071	bta04071	ssu04071	Environmental Information Processing
+map04024	hsa04024	mmu04024	bta04024	ssu04024	Environmental Information Processing
+map04022	hsa04022	mmu04022	bta04022	ssu04022	Environmental Information Processing
+map04151	hsa04151	mmu04151	bta04151	ssu04151	Environmental Information Processing
+map04152	hsa04152	mmu04152	bta04152	ssu04152	Environmental Information Processing
+map04150	hsa04150	mmu04150	bta04150	ssu04150	Environmental Information Processing
+map04075	hsa04075	mmu04075	bta04075	ssu04075	Environmental Information Processing
+map04080	hsa04080	mmu04080	bta04080	ssu04080	Environmental Information Processing
+map04060	hsa04060	mmu04060	bta04060	ssu04060	Environmental Information Processing
+map04061	hsa04061	mmu04061	bta04061	ssu04061	Environmental Information Processing
+map04512	hsa04512	mmu04512	bta04512	ssu04512	Environmental Information Processing
+map04514	hsa04514	mmu04514	bta04514	ssu04514	Environmental Information Processing
+map04144	hsa04144	mmu04144	bta04144	ssu04144	Cellular Processes
+map04145	hsa04145	mmu04145	bta04145	ssu04145	Cellular Processes
+map04142	hsa04142	mmu04142	bta04142	ssu04142	Cellular Processes
+map04146	hsa04146	mmu04146	bta04146	ssu04146	Cellular Processes
+map04140	hsa04140	mmu04140	bta04140	ssu04140	Cellular Processes
+map04138	hsa04138	mmu04138	bta04138	ssu04138	Cellular Processes
+map04136	hsa04136	mmu04136	bta04136	ssu04136	Cellular Processes
+map04137	hsa04137	mmu04137	bta04137	ssu04137	Cellular Processes
+map04139	hsa04139	mmu04139	bta04139	ssu04139	Cellular Processes
+map04110	hsa04110	mmu04110	bta04110	ssu04110	Cellular Processes
+map04111	hsa04111	mmu04111	bta04111	ssu04111	Cellular Processes
+map04112	hsa04112	mmu04112	bta04112	ssu04112	Cellular Processes
+map04113	hsa04113	mmu04113	bta04113	ssu04113	Cellular Processes
+map04114	hsa04114	mmu04114	bta04114	ssu04114	Cellular Processes
+map04210	hsa04210	mmu04210	bta04210	ssu04210	Cellular Processes
+map04214	hsa04214	mmu04214	bta04214	ssu04214	Cellular Processes
+map04215	hsa04215	mmu04215	bta04215	ssu04215	Cellular Processes
+map04216	hsa04216	mmu04216	bta04216	ssu04216	Cellular Processes
+map04217	hsa04217	mmu04217	bta04217	ssu04217	Cellular Processes
+map04115	hsa04115	mmu04115	bta04115	ssu04115	Cellular Processes
+map04218	hsa04218	mmu04218	bta04218	ssu04218	Cellular Processes
+map04510	hsa04510	mmu04510	bta04510	ssu04510	Cellular Processes
+map04520	hsa04520	mmu04520	bta04520	ssu04520	Cellular Processes
+map04530	hsa04530	mmu04530	bta04530	ssu04530	Cellular Processes
+map04540	hsa04540	mmu04540	bta04540	ssu04540	Cellular Processes
+map04550	hsa04550	mmu04550	bta04550	ssu04550	Cellular Processes
+map02024	hsa02024	mmu02024	bta02024	ssu02024	Cellular Processes
+map05111	hsa05111	mmu05111	bta05111	ssu05111	Cellular Processes
+map02025	hsa02025	mmu02025	bta02025	ssu02025	Cellular Processes
+map02026	hsa02026	mmu02026	bta02026	ssu02026	Cellular Processes
+map02030	hsa02030	mmu02030	bta02030	ssu02030	Cellular Processes
+map02040	hsa02040	mmu02040	bta02040	ssu02040	Cellular Processes
+map04814	hsa04814	mmu04814	bta04814	ssu04814	Cellular Processes
+map04810	hsa04810	mmu04810	bta04810	ssu04810	Cellular Processes
+map04640	hsa04640	mmu04640	bta04640	ssu04640	Organismal Systems
+map04610	hsa04610	mmu04610	bta04610	ssu04610	Organismal Systems
+map04611	hsa04611	mmu04611	bta04611	ssu04611	Organismal Systems
+map04613	hsa04613	mmu04613	bta04613	ssu04613	Organismal Systems
+map04620	hsa04620	mmu04620	bta04620	ssu04620	Organismal Systems
+map04624	hsa04624	mmu04624	bta04624	ssu04624	Organismal Systems
+map04621	hsa04621	mmu04621	bta04621	ssu04621	Organismal Systems
+map04622	hsa04622	mmu04622	bta04622	ssu04622	Organismal Systems
+map04623	hsa04623	mmu04623	bta04623	ssu04623	Organismal Systems
+map04625	hsa04625	mmu04625	bta04625	ssu04625	Organismal Systems
+map04650	hsa04650	mmu04650	bta04650	ssu04650	Organismal Systems
+map04612	hsa04612	mmu04612	bta04612	ssu04612	Organismal Systems
+map04660	hsa04660	mmu04660	bta04660	ssu04660	Organismal Systems
+map04658	hsa04658	mmu04658	bta04658	ssu04658	Organismal Systems
+map04659	hsa04659	mmu04659	bta04659	ssu04659	Organismal Systems
+map04657	hsa04657	mmu04657	bta04657	ssu04657	Organismal Systems
+map04662	hsa04662	mmu04662	bta04662	ssu04662	Organismal Systems
+map04664	hsa04664	mmu04664	bta04664	ssu04664	Organismal Systems
+map04666	hsa04666	mmu04666	bta04666	ssu04666	Organismal Systems
+map04670	hsa04670	mmu04670	bta04670	ssu04670	Organismal Systems
+map04672	hsa04672	mmu04672	bta04672	ssu04672	Organismal Systems
+map04062	hsa04062	mmu04062	bta04062	ssu04062	Organismal Systems
+map04911	hsa04911	mmu04911	bta04911	ssu04911	Organismal Systems
+map04910	hsa04910	mmu04910	bta04910	ssu04910	Organismal Systems
+map04922	hsa04922	mmu04922	bta04922	ssu04922	Organismal Systems
+map04923	hsa04923	mmu04923	bta04923	ssu04923	Organismal Systems
+map04920	hsa04920	mmu04920	bta04920	ssu04920	Organismal Systems
+map03320	hsa03320	mmu03320	bta03320	ssu03320	Organismal Systems
+map04929	hsa04929	mmu04929	bta04929	ssu04929	Organismal Systems
+map04912	hsa04912	mmu04912	bta04912	ssu04912	Organismal Systems
+map04913	hsa04913	mmu04913	bta04913	ssu04913	Organismal Systems
+map04915	hsa04915	mmu04915	bta04915	ssu04915	Organismal Systems
+map04914	hsa04914	mmu04914	bta04914	ssu04914	Organismal Systems
+map04917	hsa04917	mmu04917	bta04917	ssu04917	Organismal Systems
+map04921	hsa04921	mmu04921	bta04921	ssu04921	Organismal Systems
+map04926	hsa04926	mmu04926	bta04926	ssu04926	Organismal Systems
+map04935	hsa04935	mmu04935	bta04935	ssu04935	Organismal Systems
+map04918	hsa04918	mmu04918	bta04918	ssu04918	Organismal Systems
+map04919	hsa04919	mmu04919	bta04919	ssu04919	Organismal Systems
+map04928	hsa04928	mmu04928	bta04928	ssu04928	Organismal Systems
+map04916	hsa04916	mmu04916	bta04916	ssu04916	Organismal Systems
+map04924	hsa04924	mmu04924	bta04924	ssu04924	Organismal Systems
+map04614	hsa04614	mmu04614	bta04614	ssu04614	Organismal Systems
+map04925	hsa04925	mmu04925	bta04925	ssu04925	Organismal Systems
+map04927	hsa04927	mmu04927	bta04927	ssu04927	Organismal Systems
+map04260	hsa04260	mmu04260	bta04260	ssu04260	Organismal Systems
+map04261	hsa04261	mmu04261	bta04261	ssu04261	Organismal Systems
+map04270	hsa04270	mmu04270	bta04270	ssu04270	Organismal Systems
+map04970	hsa04970	mmu04970	bta04970	ssu04970	Organismal Systems
+map04971	hsa04971	mmu04971	bta04971	ssu04971	Organismal Systems
+map04972	hsa04972	mmu04972	bta04972	ssu04972	Organismal Systems
+map04976	hsa04976	mmu04976	bta04976	ssu04976	Organismal Systems
+map04973	hsa04973	mmu04973	bta04973	ssu04973	Organismal Systems
+map04974	hsa04974	mmu04974	bta04974	ssu04974	Organismal Systems
+map04975	hsa04975	mmu04975	bta04975	ssu04975	Organismal Systems
+map04979	hsa04979	mmu04979	bta04979	ssu04979	Organismal Systems
+map04977	hsa04977	mmu04977	bta04977	ssu04977	Organismal Systems
+map04978	hsa04978	mmu04978	bta04978	ssu04978	Organismal Systems
+map04962	hsa04962	mmu04962	bta04962	ssu04962	Organismal Systems
+map04960	hsa04960	mmu04960	bta04960	ssu04960	Organismal Systems
+map04961	hsa04961	mmu04961	bta04961	ssu04961	Organismal Systems
+map04964	hsa04964	mmu04964	bta04964	ssu04964	Organismal Systems
+map04966	hsa04966	mmu04966	bta04966	ssu04966	Organismal Systems
+map04724	hsa04724	mmu04724	bta04724	ssu04724	Organismal Systems
+map04727	hsa04727	mmu04727	bta04727	ssu04727	Organismal Systems
+map04725	hsa04725	mmu04725	bta04725	ssu04725	Organismal Systems
+map04728	hsa04728	mmu04728	bta04728	ssu04728	Organismal Systems
+map04726	hsa04726	mmu04726	bta04726	ssu04726	Organismal Systems
+map04720	hsa04720	mmu04720	bta04720	ssu04720	Organismal Systems
+map04730	hsa04730	mmu04730	bta04730	ssu04730	Organismal Systems
+map04723	hsa04723	mmu04723	bta04723	ssu04723	Organismal Systems
+map04721	hsa04721	mmu04721	bta04721	ssu04721	Organismal Systems
+map04722	hsa04722	mmu04722	bta04722	ssu04722	Organismal Systems
+map04744	hsa04744	mmu04744	bta04744	ssu04744	Organismal Systems
+map04745	hsa04745	mmu04745	bta04745	ssu04745	Organismal Systems
+map04740	hsa04740	mmu04740	bta04740	ssu04740	Organismal Systems
+map04742	hsa04742	mmu04742	bta04742	ssu04742	Organismal Systems
+map04750	hsa04750	mmu04750	bta04750	ssu04750	Organismal Systems
+map04320	hsa04320	mmu04320	bta04320	ssu04320	Organismal Systems
+map04360	hsa04360	mmu04360	bta04360	ssu04360	Organismal Systems
+map04361	hsa04361	mmu04361	bta04361	ssu04361	Organismal Systems
+map04380	hsa04380	mmu04380	bta04380	ssu04380	Organismal Systems
+map04211	hsa04211	mmu04211	bta04211	ssu04211	Organismal Systems
+map04212	hsa04212	mmu04212	bta04212	ssu04212	Organismal Systems
+map04213	hsa04213	mmu04213	bta04213	ssu04213	Organismal Systems
+map04710	hsa04710	mmu04710	bta04710	ssu04710	Organismal Systems
+map04713	hsa04713	mmu04713	bta04713	ssu04713	Organismal Systems
+map04711	hsa04711	mmu04711	bta04711	ssu04711	Organismal Systems
+map04712	hsa04712	mmu04712	bta04712	ssu04712	Organismal Systems
+map04714	hsa04714	mmu04714	bta04714	ssu04714	Organismal Systems
+map04626	hsa04626	mmu04626	bta04626	ssu04626	Organismal Systems
+map05200	hsa05200	mmu05200	bta05200	ssu05200	Human Diseases
+map05202	hsa05202	mmu05202	bta05202	ssu05202	Human Diseases
+map05206	hsa05206	mmu05206	bta05206	ssu05206	Human Diseases
+map05205	hsa05205	mmu05205	bta05205	ssu05205	Human Diseases
+map05204	hsa05204	mmu05204	bta05204	ssu05204	Human Diseases
+map05207	hsa05207	mmu05207	bta05207	ssu05207	Human Diseases
+map05208	hsa05208	mmu05208	bta05208	ssu05208	Human Diseases
+map05203	hsa05203	mmu05203	bta05203	ssu05203	Human Diseases
+map05230	hsa05230	mmu05230	bta05230	ssu05230	Human Diseases
+map05231	hsa05231	mmu05231	bta05231	ssu05231	Human Diseases
+map05235	hsa05235	mmu05235	bta05235	ssu05235	Human Diseases
+map05210	hsa05210	mmu05210	bta05210	ssu05210	Human Diseases
+map05212	hsa05212	mmu05212	bta05212	ssu05212	Human Diseases
+map05225	hsa05225	mmu05225	bta05225	ssu05225	Human Diseases
+map05226	hsa05226	mmu05226	bta05226	ssu05226	Human Diseases
+map05214	hsa05214	mmu05214	bta05214	ssu05214	Human Diseases
+map05216	hsa05216	mmu05216	bta05216	ssu05216	Human Diseases
+map05221	hsa05221	mmu05221	bta05221	ssu05221	Human Diseases
+map05220	hsa05220	mmu05220	bta05220	ssu05220	Human Diseases
+map05217	hsa05217	mmu05217	bta05217	ssu05217	Human Diseases
+map05218	hsa05218	mmu05218	bta05218	ssu05218	Human Diseases
+map05211	hsa05211	mmu05211	bta05211	ssu05211	Human Diseases
+map05219	hsa05219	mmu05219	bta05219	ssu05219	Human Diseases
+map05215	hsa05215	mmu05215	bta05215	ssu05215	Human Diseases
+map05213	hsa05213	mmu05213	bta05213	ssu05213	Human Diseases
+map05224	hsa05224	mmu05224	bta05224	ssu05224	Human Diseases
+map05222	hsa05222	mmu05222	bta05222	ssu05222	Human Diseases
+map05223	hsa05223	mmu05223	bta05223	ssu05223	Human Diseases
+map05166	hsa05166	mmu05166	bta05166	ssu05166	Human Diseases
+map05170	hsa05170	mmu05170	bta05170	ssu05170	Human Diseases
+map05161	hsa05161	mmu05161	bta05161	ssu05161	Human Diseases
+map05160	hsa05160	mmu05160	bta05160	ssu05160	Human Diseases
+map05171	hsa05171	mmu05171	bta05171	ssu05171	Human Diseases
+map05164	hsa05164	mmu05164	bta05164	ssu05164	Human Diseases
+map05162	hsa05162	mmu05162	bta05162	ssu05162	Human Diseases
+map05168	hsa05168	mmu05168	bta05168	ssu05168	Human Diseases
+map05163	hsa05163	mmu05163	bta05163	ssu05163	Human Diseases
+map05167	hsa05167	mmu05167	bta05167	ssu05167	Human Diseases
+map05169	hsa05169	mmu05169	bta05169	ssu05169	Human Diseases
+map05165	hsa05165	mmu05165	bta05165	ssu05165	Human Diseases
+map05110	hsa05110	mmu05110	bta05110	ssu05110	Human Diseases
+map05120	hsa05120	mmu05120	bta05120	ssu05120	Human Diseases
+map05130	hsa05130	mmu05130	bta05130	ssu05130	Human Diseases
+map05132	hsa05132	mmu05132	bta05132	ssu05132	Human Diseases
+map05131	hsa05131	mmu05131	bta05131	ssu05131	Human Diseases
+map05135	hsa05135	mmu05135	bta05135	ssu05135	Human Diseases
+map05133	hsa05133	mmu05133	bta05133	ssu05133	Human Diseases
+map05134	hsa05134	mmu05134	bta05134	ssu05134	Human Diseases
+map05150	hsa05150	mmu05150	bta05150	ssu05150	Human Diseases
+map05152	hsa05152	mmu05152	bta05152	ssu05152	Human Diseases
+map05100	hsa05100	mmu05100	bta05100	ssu05100	Human Diseases
+map05146	hsa05146	mmu05146	bta05146	ssu05146	Human Diseases
+map05144	hsa05144	mmu05144	bta05144	ssu05144	Human Diseases
+map05145	hsa05145	mmu05145	bta05145	ssu05145	Human Diseases
+map05140	hsa05140	mmu05140	bta05140	ssu05140	Human Diseases
+map05142	hsa05142	mmu05142	bta05142	ssu05142	Human Diseases
+map05143	hsa05143	mmu05143	bta05143	ssu05143	Human Diseases
+map05310	hsa05310	mmu05310	bta05310	ssu05310	Human Diseases
+map05322	hsa05322	mmu05322	bta05322	ssu05322	Human Diseases
+map05323	hsa05323	mmu05323	bta05323	ssu05323	Human Diseases
+map05320	hsa05320	mmu05320	bta05320	ssu05320	Human Diseases
+map05321	hsa05321	mmu05321	bta05321	ssu05321	Human Diseases
+map05330	hsa05330	mmu05330	bta05330	ssu05330	Human Diseases
+map05332	hsa05332	mmu05332	bta05332	ssu05332	Human Diseases
+map05340	hsa05340	mmu05340	bta05340	ssu05340	Human Diseases
+map05010	hsa05010	mmu05010	bta05010	ssu05010	Human Diseases
+map05012	hsa05012	mmu05012	bta05012	ssu05012	Human Diseases
+map05014	hsa05014	mmu05014	bta05014	ssu05014	Human Diseases
+map05016	hsa05016	mmu05016	bta05016	ssu05016	Human Diseases
+map05017	hsa05017	mmu05017	bta05017	ssu05017	Human Diseases
+map05020	hsa05020	mmu05020	bta05020	ssu05020	Human Diseases
+map05022	hsa05022	mmu05022	bta05022	ssu05022	Human Diseases
+map05030	hsa05030	mmu05030	bta05030	ssu05030	Human Diseases
+map05031	hsa05031	mmu05031	bta05031	ssu05031	Human Diseases
+map05032	hsa05032	mmu05032	bta05032	ssu05032	Human Diseases
+map05033	hsa05033	mmu05033	bta05033	ssu05033	Human Diseases
+map05034	hsa05034	mmu05034	bta05034	ssu05034	Human Diseases
+map05417	hsa05417	mmu05417	bta05417	ssu05417	Human Diseases
+map05418	hsa05418	mmu05418	bta05418	ssu05418	Human Diseases
+map05410	hsa05410	mmu05410	bta05410	ssu05410	Human Diseases
+map05412	hsa05412	mmu05412	bta05412	ssu05412	Human Diseases
+map05414	hsa05414	mmu05414	bta05414	ssu05414	Human Diseases
+map05415	hsa05415	mmu05415	bta05415	ssu05415	Human Diseases
+map05416	hsa05416	mmu05416	bta05416	ssu05416	Human Diseases
+map04930	hsa04930	mmu04930	bta04930	ssu04930	Human Diseases
+map04940	hsa04940	mmu04940	bta04940	ssu04940	Human Diseases
+map04950	hsa04950	mmu04950	bta04950	ssu04950	Human Diseases
+map04936	hsa04936	mmu04936	bta04936	ssu04936	Human Diseases
+map04932	hsa04932	mmu04932	bta04932	ssu04932	Human Diseases
+map04931	hsa04931	mmu04931	bta04931	ssu04931	Human Diseases
+map04933	hsa04933	mmu04933	bta04933	ssu04933	Human Diseases
+map04934	hsa04934	mmu04934	bta04934	ssu04934	Human Diseases
+map01501	hsa01501	mmu01501	bta01501	ssu01501	Human Diseases
+map01502	hsa01502	mmu01502	bta01502	ssu01502	Human Diseases
+map01503	hsa01503	mmu01503	bta01503	ssu01503	Human Diseases
+map01521	hsa01521	mmu01521	bta01521	ssu01521	Human Diseases
+map01524	hsa01524	mmu01524	bta01524	ssu01524	Human Diseases
+map01523	hsa01523	mmu01523	bta01523	ssu01523	Human Diseases
+map01522	hsa01522	mmu01522	bta01522	ssu01522	Human Diseases
+map01001	hsa01001	mmu01001	bta01001	ssu01001	Brite Hierarchies
+map01009	hsa01009	mmu01009	bta01009	ssu01009	Brite Hierarchies
+map01002	hsa01002	mmu01002	bta01002	ssu01002	Brite Hierarchies
+map01003	hsa01003	mmu01003	bta01003	ssu01003	Brite Hierarchies
+map01005	hsa01005	mmu01005	bta01005	ssu01005	Brite Hierarchies
+map01011	hsa01011	mmu01011	bta01011	ssu01011	Brite Hierarchies
+map01004	hsa01004	mmu01004	bta01004	ssu01004	Brite Hierarchies
+map01008	hsa01008	mmu01008	bta01008	ssu01008	Brite Hierarchies
+map01006	hsa01006	mmu01006	bta01006	ssu01006	Brite Hierarchies
+map01007	hsa01007	mmu01007	bta01007	ssu01007	Brite Hierarchies
+map00199	hsa00199	mmu00199	bta00199	ssu00199	Brite Hierarchies
+map00194	hsa00194	mmu00194	bta00194	ssu00194	Brite Hierarchies
+map03000	hsa03000	mmu03000	bta03000	ssu03000	Brite Hierarchies
+map03021	hsa03021	mmu03021	bta03021	ssu03021	Brite Hierarchies
+map03019	hsa03019	mmu03019	bta03019	ssu03019	Brite Hierarchies
+map03041	hsa03041	mmu03041	bta03041	ssu03041	Brite Hierarchies
+map03011	hsa03011	mmu03011	bta03011	ssu03011	Brite Hierarchies
+map03009	hsa03009	mmu03009	bta03009	ssu03009	Brite Hierarchies
+map03016	hsa03016	mmu03016	bta03016	ssu03016	Brite Hierarchies
+map03012	hsa03012	mmu03012	bta03012	ssu03012	Brite Hierarchies
+map03110	hsa03110	mmu03110	bta03110	ssu03110	Brite Hierarchies
+map04131	hsa04131	mmu04131	bta04131	ssu04131	Brite Hierarchies
+map04121	hsa04121	mmu04121	bta04121	ssu04121	Brite Hierarchies
+map03051	hsa03051	mmu03051	bta03051	ssu03051	Brite Hierarchies
+map03032	hsa03032	mmu03032	bta03032	ssu03032	Brite Hierarchies
+map03036	hsa03036	mmu03036	bta03036	ssu03036	Brite Hierarchies
+map03400	hsa03400	mmu03400	bta03400	ssu03400	Brite Hierarchies
+map03029	hsa03029	mmu03029	bta03029	ssu03029	Brite Hierarchies
+map02000	hsa02000	mmu02000	bta02000	ssu02000	Brite Hierarchies
+map02044	hsa02044	mmu02044	bta02044	ssu02044	Brite Hierarchies
+map02042	hsa02042	mmu02042	bta02042	ssu02042	Brite Hierarchies
+map02022	hsa02022	mmu02022	bta02022	ssu02022	Brite Hierarchies
+map02035	hsa02035	mmu02035	bta02035	ssu02035	Brite Hierarchies
+map03037	hsa03037	mmu03037	bta03037	ssu03037	Brite Hierarchies
+map04812	hsa04812	mmu04812	bta04812	ssu04812	Brite Hierarchies
+map04147	hsa04147	mmu04147	bta04147	ssu04147	Brite Hierarchies
+map02048	hsa02048	mmu02048	bta02048	ssu02048	Brite Hierarchies
+map04030	hsa04030	mmu04030	bta04030	ssu04030	Brite Hierarchies
+map04050	hsa04050	mmu04050	bta04050	ssu04050	Brite Hierarchies
+map04054	hsa04054	mmu04054	bta04054	ssu04054	Brite Hierarchies
+map03310	hsa03310	mmu03310	bta03310	ssu03310	Brite Hierarchies
+map04040	hsa04040	mmu04040	bta04040	ssu04040	Brite Hierarchies
+map04031	hsa04031	mmu04031	bta04031	ssu04031	Brite Hierarchies
+map04052	hsa04052	mmu04052	bta04052	ssu04052	Brite Hierarchies
+map04515	hsa04515	mmu04515	bta04515	ssu04515	Brite Hierarchies
+map04090	hsa04090	mmu04090	bta04090	ssu04090	Brite Hierarchies
+map01504	hsa01504	mmu01504	bta01504	ssu01504	Brite Hierarchies
+map00535	hsa00535	mmu00535	bta00535	ssu00535	Brite Hierarchies
+map00536	hsa00536	mmu00536	bta00536	ssu00536	Brite Hierarchies
+map00537	hsa00537	mmu00537	bta00537	ssu00537	Brite Hierarchies
+map04091	hsa04091	mmu04091	bta04091	ssu04091	Brite Hierarchies
+map04990	hsa04990	mmu04990	bta04990	ssu04990	Brite Hierarchies
+map03200	hsa03200	mmu03200	bta03200	ssu03200	Brite Hierarchies
+map03210	hsa03210	mmu03210	bta03210	ssu03210	Brite Hierarchies
+map03100	hsa03100	mmu03100	bta03100	ssu03100	Brite Hierarchies
+map99980	hsa99980	mmu99980	bta99980	ssu99980	Not Included in Pathway or Brite
+map99981	hsa99981	mmu99981	bta99981	ssu99981	Not Included in Pathway or Brite
+map99982	hsa99982	mmu99982	bta99982	ssu99982	Not Included in Pathway or Brite
+map99983	hsa99983	mmu99983	bta99983	ssu99983	Not Included in Pathway or Brite
+map99984	hsa99984	mmu99984	bta99984	ssu99984	Not Included in Pathway or Brite
+map99985	hsa99985	mmu99985	bta99985	ssu99985	Not Included in Pathway or Brite
+map99986	hsa99986	mmu99986	bta99986	ssu99986	Not Included in Pathway or Brite
+map99987	hsa99987	mmu99987	bta99987	ssu99987	Not Included in Pathway or Brite
+map99988	hsa99988	mmu99988	bta99988	ssu99988	Not Included in Pathway or Brite
+map99999	hsa99999	mmu99999	bta99999	ssu99999	Not Included in Pathway or Brite
+map99973	hsa99973	mmu99973	bta99973	ssu99973	Not Included in Pathway or Brite
+map99974	hsa99974	mmu99974	bta99974	ssu99974	Not Included in Pathway or Brite
+map99975	hsa99975	mmu99975	bta99975	ssu99975	Not Included in Pathway or Brite
+map99976	hsa99976	mmu99976	bta99976	ssu99976	Not Included in Pathway or Brite
+map99998	hsa99998	mmu99998	bta99998	ssu99998	Not Included in Pathway or Brite
+map99977	hsa99977	mmu99977	bta99977	ssu99977	Not Included in Pathway or Brite
+map99978	hsa99978	mmu99978	bta99978	ssu99978	Not Included in Pathway or Brite
+map99993	hsa99993	mmu99993	bta99993	ssu99993	Not Included in Pathway or Brite
+map99995	hsa99995	mmu99995	bta99995	ssu99995	Not Included in Pathway or Brite
+map99992	hsa99992	mmu99992	bta99992	ssu99992	Not Included in Pathway or Brite
+map99994	hsa99994	mmu99994	bta99994	ssu99994	Not Included in Pathway or Brite
+map99979	hsa99979	mmu99979	bta99979	ssu99979	Not Included in Pathway or Brite
+map99996	hsa99996	mmu99996	bta99996	ssu99996	Not Included in Pathway or Brite
+map99997	hsa99997	mmu99997	bta99997	ssu99997	Not Included in Pathway or Brite
