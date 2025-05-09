@@ -4,7 +4,7 @@ cat raw_fq.filelist | parallel -j 6 --colsep="\t" run_fastp_rmhost.sh {2} pig cl
 
 # assemble
 cat clean_fq.filelist | parallel -j 5 --colsep="\t" run_megahit.sh {2} assembly/{1}
-../sample_name | parallel -j 2 seqkit seq -g -m 1500 {}.fa \| seqkit replace -p \" .\*\" -r \"\" \| seqkit replace -p \"\^\" -r \"{}\|\" -o {}.m1500.fa
+cat ../sample_name | parallel -j 2 seqkit seq -g -m 1500 {}.fa \| seqkit replace -p \" .\*\" -r \"\" \| seqkit replace -p \"\^\" -r \"{}\|\" -o {}.m1500.fa
 
 
 # binning
