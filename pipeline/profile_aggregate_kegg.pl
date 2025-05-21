@@ -1,5 +1,4 @@
 #!/usr/bin/perl
-# encoding: utf-8
 # author : Jinxin Meng
 # created date: 2023-10-09, 21:06:33
 # modified date: 2023-11-19, 21:06:33
