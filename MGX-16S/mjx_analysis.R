@@ -1,51 +1,58 @@
-#### Jinxin Meng, 20250325, 20250415 ####
-setwd("F:/project/20250313_PDCoV_BAC_Bile_Zhangyq/MGX-16S/")
+#### Jinxin Meng, 20250325, 20250517 ####
 pacman::p_load(tidyr, dplyr, tibble, purrr, ggpubr, rstatix)
-source("/code/R_func/profile_process.R")
-source("/code/R_func/taxa.R")
+source('/code/R_func/profile_process.R')
+source('/code/R_func/taxa.R')
 
 #### metadata ####
-grp <- c('Mock','PDCoV')
-grp_col <- structure(c('#a0a0a4','#d7b0b0'), names = grp)
+group_level <- c('Mock','PDCoV')
+group_color <- structure(c('#a0a0a4','#d7b0b0'), names = group_level)
 
-group <- read.delim("group.tsv")
-profile <- read.delim("profile.tsv", row.names = 1, check.names = F) %>% 
+group <- read.delim('group.tsv')
+profile <- read.delim('profile.tsv', row.names = 1, check.names = F) %>% 
   profile_transRA()
-taxa <- read.delim("taxa.tsv")
+taxa <- read.delim('taxa.tsv')
 tr <- treeio::read.tree('tree.nwk')
 
 #### alpha ####
-source("/code/R_func/diversity.R")
+source('/code/R_func/diversity.R')
 
 map(c('pd', 'shannon', 'richness', 'ace'), ~
   calcu_alpha(profile, method = .x, tree = tr) %>% 
-    left_join(group, by = "sample") %>% 
-    mutate(group = factor(group, grp)) %>% 
-    ggboxplot("group", "value", fill = "group", palette = grp_col, 
-            legend = "none", outlier.size = 1, xlab = "", 
+    left_join(group, by = 'sample') %>% 
+    mutate(group = factor(group, group_level)) %>% 
+    ggboxplot('group', 'value', fill = 'group', palette = group_color, 
+            legend = 'none', outlier.size = 1, xlab = '', 
             ylab = paste0(.x, ' index')) +
-    stat_compare_means(comparisons = list(grp), label = "p.signif", 
+    stat_compare_means(comparisons = list(group_level), label = 'p.signif', 
                        step.increase = .06, vjust = .7, tip.length = .02) +
     theme(aspect.ratio = 2) ) %>% 
   cowplot::plot_grid(plotlist = ., nrow = 1, align = 'v')
 
-#### PCoA ####
-source("/code/R_func/plot_PCoA.R")
+map_dfr(c('pd', 'shannon', 'richness', 'ace'), ~
+          calcu_alpha(profile, method = .x, tree = tr) %>%
+          left_join(group, by = 'sample') %>% 
+          mutate(name = .x) ) %>% 
+  group_by(name) %>% 
+  wilcox_effsize(value ~ group, ref.group = 'Mock')
 
-plot_PCoA(profile, group, group_order = grp, group_color = grp_col, 
-          add_group_label = T, lab_size = 3, ellipse_level = .9, 
+#### PCoA ####
+source('/code/R_func/plot_PCoA.R')
+
+plot_PCoA(profile, group, group_level = group_level, group_color = group_color, 
+          add_group_label = T, label_size = 3, ellipse_level = .9, 
           show_legend = F, show_grid = T, show_line = F)
 
 #### compos ####
-source("F:/code/R_func/taxa.R")
+source('F:/code/R_func/taxa.R')
 
-colors <- c("#8dd3c7","#ffffb3","#80b1d3","#b3de69","#fdb462","#bc80bd","#fb8072",
-            "#ffed6f","#fccde5","#bebada","#e5c494","#ccebc5","#d9d9d9")
+colors <- c('#8dd3c7','#ffffb3','#80b1d3','#b3de69','#fdb462','#bc80bd','#fb8072',
+            '#ffed6f','#fccde5','#bebada','#e5c494','#ccebc5','#d9d9d9')
 
 # phylum
 data <- taxa_trans(profile, taxa, group, to = 'phylum', out_all = T) %>% 
   filter(rownames(.) != 'p__Unknown')
-plot_compos_manual(data, group, taxa_color = colors, group_order = grp,
+
+plot_compos_manual(data, group, taxa_color = colors, group_level = group_level,
                    plot_title = 'Phylum level') +
   theme(aspect.ratio = 2.4)
 
@@ -53,8 +60,8 @@ plot_compos_manual(data, group, taxa_color = colors, group_order = grp,
 data <- taxa_trans(profile, taxa, group, to = 'genus', top_n = 12,
                    other_name = 'g__Other') %>% 
   filter(rownames(.) != 'g__Unknown')
-plot_compos_manual(data, group, taxa_color = colors, group_order = grp, out_all = T,
-                   plot_title = 'Genus level') +
+plot_compos_manual(data, group, taxa_color = colors, group_level = group_level, 
+                   out_all = T, plot_title = 'Genus level') +
   theme(aspect.ratio = 2.4)
 
 # abundance
@@ -67,26 +74,29 @@ data <- map(c('phylum', 'genus'), ~
 # diff
 diffs <- map(c('phylum', 'family', 'genus'), ~
                taxa_trans(profile, taxa, group, to = .x, out_all = T) %>%
-               profile_transRA() %>% rownames_to_column('name') %>% 
+               profile_transRA() %>% 
+               rownames_to_column('name') %>% 
                gather('sample', 'value', -name) %>% 
                left_join(group, by = 'sample') %>% 
                group_by(name) %>% 
                wilcox_test(value ~ group, comparisons = c('PDCoV', 'Mock'), 
-                           p.adjust.method = 'BH', detailed = T) %>% 
+                           detailed = T) %>% 
+               adjust_pvalue() %>% 
                select(-.y.) ) %>% 
   set_names(c('phylum', 'family', 'genus'))
+write.xlsx(diffs, 'taxa.compos.rela_ab.diff.xlsx')
 
 #### lefse ####
 library(microeco)
 library(magrittr)
 
 set.seed(2025)
-group <- read.delim("group.tsv") %>% 
+group <- read.delim('group.tsv') %>% 
   column_to_rownames('sample') %>% 
   mutate(group = factor(group))
-profile <- read.delim("profile.tsv", row.names = 1) %>% 
+profile <- read.delim('profile.tsv', row.names = 1) %>% 
   profile_transRA()
-taxa <- read.delim("taxa.tsv") %>% 
+taxa <- read.delim('taxa.tsv') %>% 
   column_to_rownames('name') %>% 
   tidy_taxonomy() %>% 
   rename_all(~ str_to_title(.x))
@@ -100,13 +110,13 @@ trans_abund$new(dataset)
 lefse <- trans_diff$new(dataset = dataset, method = 'lefse', group = 'group',
                         alpha = 1)
 
-lefse$plot_diff_bar(use_number = 1:30, width = 0.6, group_order = grp, 
-                    color_values = grp_col) + 
+lefse$plot_diff_bar(use_number = 1:30, width = 0.6, group_order = group, 
+                    color_values = group_color) + 
   theme_pubr()
 
 lefse$plot_diff_cladogram(use_taxa_num = 160, use_feature_num = 40, 
-                          clade_label_level = 6, group_order = grp, 
-                          color = grp_col)
+                          clade_label_level = 6, group_order = group, 
+                          color = group_color)
 
 #### correlation ####
 library(tidygraph)
@@ -140,8 +150,8 @@ nodes <- data.frame(node = unique(c(edges$from, edges$to))) %>%
 
 g <- tbl_graph(nodes = nodes, edges = edges)
 
-colors <- c("#8dd3c7","#bebada","#fb8072","#80b1d3",
-            "#fdb462","#b3de69","#fccde5","#bc80bd","#ffed6f",
+colors <- c('#8dd3c7','#bebada','#fb8072','#80b1d3',
+            '#fdb462','#b3de69','#fccde5','#bc80bd','#ffed6f',
             '#1b9e77','#d95f02','#7570b3','#e7298a')
 
 ggraph(g, layout = 'linear', circular = T) +
@@ -149,7 +159,7 @@ ggraph(g, layout = 'linear', circular = T) +
                     edge_colour = direct), strength = .2) +
   scale_edge_linetype_manual(values = c(2, 1)) +
   scale_edge_width(range = c(.5, .8)) +
-  scale_edge_color_manual(values = c("#7fc97f","#fdc086")) +
+  scale_edge_color_manual(values = c('#7fc97f','#fdc086')) +
   geom_node_point(aes(color = phylum, shape = type), size = 3) +
   scale_shape_manual(values = c(16, 15)) +
   scale_color_manual(values = colors) +
