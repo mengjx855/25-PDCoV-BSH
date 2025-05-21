@@ -12,6 +12,7 @@ cat sample_name | parallel -j 6 run_minimap2.sh clean_fq/{}_rmhost_1.fq.gz,clean
 cat sample_name | parallel -j 6 SemiBin2 single_easy_bin -t 32 --random-seed 2025 -i assembly/{}.m1500.fa --input-bam semibin2/{}.sort.bam --environment pig_gut -o semibin2/{}
 ls */output_bins/* | perl -ne 'chomp;$x=$_;@s=split/\//;$s[2]=~s/SemiBin_//;print "cp $_ bins/$s[0].$s[2]\n"' | sh
 
+
 # checkm2
 checkm2 predict --input semibin2/bins/ --output-directory checkm2 --tmpdir /tmp -x .fa --threads 56 --force
 awk -F '\t' '$2>50 && $3<=10' quality_report.tsv > bins.after_qc.MQ.tsv
