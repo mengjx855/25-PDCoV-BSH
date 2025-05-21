@@ -1,23 +1,22 @@
-#### Jinxin Meng, 20250325, 20250415 ####
-setwd("F:/project/20250313_PDCoV_BAC_Bile_Zhangyq/data_available/statistics/MGX-WGS/")
+#### Jinxin Meng, 20250325, 20250517 ####
 pacman::p_load(tidyr, dplyr, tibble, purrr, ggpubr, rstatix, openxlsx)
-source("/code/R_func/profile_process.R")
-source("/code/R_func/taxa.R")
-source("/code/R_func/difference_analysis.R")
+source('/code/R_func/profile_process.R')
+source('/code/R_func/taxa.R')
+source('/code/R_func/difference_analysis.R')
 
 #### info ####
-grp <- c('Mock','PDCoV')
-grp_col <- structure(c('#a0a0a4','#d7b0b0'), names = grp)
+group_level <- c('Mock','PDCoV')
+group_color <- structure(c('#a0a0a4','#d7b0b0'), names = group_level)
 
 group <- read.delim('group.tsv')
 
-cvg <- read.delim("species.cvg", row.names = 1, check.names = F) %>% 
+cvg <- read.delim('species.cvg', row.names = 1, check.names = F) %>% 
   apply(2, \(x) ifelse(x < .1, 0, 1))
-profile <- cvg * read.delim("species.tpm", row.names = 1, check.names = F)
+profile <- cvg * read.delim('species.tpm', row.names = 1, check.names = F)
 profile <- apply(profile, 2, \(x) x/sum(x) * 100) %>% 
   data.frame()
 
-taxa <- read.delim("gtdbtk.tsv")
+taxa <- read.delim('gtdbtk.tsv')
 
 tr <- treeio::read.tree('faa_species.tre')
 
@@ -27,45 +26,53 @@ write.xlsx(data, 'species.xlsx')
 write.table(data, 'species.tsv', sep = '\t', quote = F, row.names = F)
 
 #### alpha ####
-source("/code/R_func/diversity.R") 
+source('/code/R_func/diversity.R') 
 
 map(c('pd', 'shannon', 'richness'), ~
   calcu_alpha(profile, method = .x, tree = tr) %>% 
-    left_join(group, by = "sample") %>% 
-    mutate(group = factor(group, grp)) %>% 
-    ggboxplot("group", "value", fill = "group", palette = grp_col, 
-            legend = "none", outlier.size = 1, xlab = "", 
+    left_join(group, by = 'sample') %>% 
+    mutate(group = factor(group, group_level)) %>% 
+    ggboxplot('group', 'value', fill = 'group', palette = group_color, 
+            legend = 'none', outlier.size = 1, xlab = '', 
             ylab = paste0(.x, ' index')) +
-    stat_compare_means(comparisons = list(grp), label = "p.signif", 
+    stat_compare_means(comparisons = list(group_level), label = 'p.signif', 
                        step.increase = .06, vjust = .7, tip.length = .02) +
     theme(aspect.ratio = 2) ) %>% 
   cowplot::plot_grid(plotlist = ., nrow = 1, align = 'v')
 
-#### PCoA ####
-source("/code/R_func/plot_PCoA.R")
+map_dfr(c('pd', 'shannon', 'richness', 'ace'), ~
+          calcu_alpha(profile, method = .x, tree = tr) %>%
+          left_join(group, by = 'sample') %>% 
+          mutate(name = .x) ) %>% 
+  group_by(name) %>% 
+  wilcox_effsize(value ~ group, ref.group = 'Mock')
 
-plot_PCoA(profile, group, group_order = grp, group_color = grp_col, 
-          add_group_label = T, lab_size = 3, ellipse_level = .8, 
+#### PCoA ####
+source('/code/R_func/plot_PCoA.R')
+
+plot_PCoA(profile, group, group_level = group_level, group_color = group_color, 
+          add_group_label = T, label_size = 3, ellipse_level = .8, 
           show_legend = F, show_grid = T, show_line = F)
 
 #### compos ####
-source("F:/code/R_func/taxa.R")
+source('F:/code/R_func/taxa.R')
 
-colors <- c("#8dd3c7","#ffffb3","#80b1d3","#b3de69","#fdb462","#bc80bd","#fb8072",
-            "#ffed6f","#fccde5","#bebada","#e5c494","#ccebc5","#d9d9d9")
+colors <- c('#8dd3c7','#ffffb3','#80b1d3','#b3de69','#fdb462','#bc80bd','#fb8072',
+            '#ffed6f','#fccde5','#bebada','#e5c494','#ccebc5','#d9d9d9')
 
 # composition
 map(c('phylum', 'genus', 'species'), ~ {
   .data <- taxa_trans(profile, taxa, group, to = .x, top_n = 12,
                       other_name = paste0(str_sub(.x, 1, 1), '__Other')) %>% 
     filter(!grepl('Unknown', rownames(.)))
-  plot_compos_manual(.data, group, taxa_color = colors, group_order = grp, 
+  plot_compos_manual(.data, group, taxa_color = colors, group_level = group_level, 
                      plot_title = str_to_sentence(paste0(.x, ' level')),
                      out_all = T) +
     theme(aspect.ratio = 2.4) }) %>% 
   cowplot::plot_grid(plotlist = ., nrow = 1, align = 'v')
 
 # abundance
+# p-value
 data <- map(c('phylum', 'family', 'genus', 'species'), ~ {
   .data <- taxa_trans(profile, taxa, group, to = .x, out_all = T, transRA = T) 
   .ab <- .data %>% 
@@ -76,7 +83,8 @@ data <- map(c('phylum', 'family', 'genus', 'species'), ~ {
     gather('sample', 'value', -name) %>% 
     left_join(group, by = 'sample') %>% 
     group_by(name) %>% 
-    wilcox_test(value ~ group, comparisons = grp, detailed = T) %>% 
+    wilcox_test(value ~ group, comparisons = group_level, detailed = T) %>% 
+    adjust_pvalue(method = 'BH') %>% 
     select(-.y., -n1, -n2, -statistic) %>% 
     mutate(enriched = ifelse(p < 0.05 & estimate > 0, 'Mock', 
                              ifelse(p < 0.05 & estimate < 0, 'PDCoV', 'none')))
@@ -84,15 +92,26 @@ data <- map(c('phylum', 'family', 'genus', 'species'), ~ {
   set_names(c('phylum', 'family', 'genus', 'species'))
 write.xlsx(data, 'taxa.compos.rela_ab.diff.xlsx')
 
+# effect size
+data <- map(c('phylum', 'family', 'genus', 'species'), ~ 
+      taxa_trans(profile, taxa, group, to = .x, out_all = T, transRA = T) %>% 
+      rownames_to_column('name') %>% 
+      gather('sample', 'value', -name) %>% 
+      left_join(group, by = 'sample') %>% 
+      group_by(name) %>% 
+      wilcox_effsize(value ~ group) ) %>% 
+  set_names(c('phylum', 'family', 'genus', 'species'))
+write.xlsx(data, 'taxa.compos.rela_ab.diff.effect_size.xlsx')
+ 
 # phylum vis
 data <- taxa_trans(profile, taxa, group, to = 'phylum', out_all = T)
-plot_taxa_boxplot(data, group, group_order = grp, group_color = grp_col, 
+plot_taxa_boxplot(data, group, group_level = group_level, group_color = group_color, 
                   show_legend = F, legend_title = '', aspect_ratio = 2) %>% 
   cowplot::plot_grid(plotlist = ., nrow = 3, align = 'v')
 
 # genus vis
-diff <- data <- taxa_trans(profile, taxa, group, to = 'genus', out_all = T) %>% 
-  difference_analysis(group, comparison = c('PDCoV', 'Mock'), add_enriched = T)
+diff <- taxa_trans(profile, taxa, group, to = 'genus', out_all = T) %>% 
+  difference_analysis(group, comparison = group_level, add_enriched = T)
 write.xlsx(diff, 'taxa.compos.g.diff.xlsx')
 
 plot_data <- diff %>% 
@@ -104,7 +123,7 @@ plot_data <- diff %>%
 ggscatter(plot_data, '.PDCoV_ab', '.Mock_ab', color = 'enriched', size = 'enriched',
             xlab = 'Log10 relative abundance in PDCoV',
             ylab = 'Log10 relative abundance in Mock',
-            palette = c(grp_col, 'none' = 'grey88')) + 
+            palette = c(group_color, 'none' = 'grey88')) + 
   geom_abline(slope = 1, intercept = 0, linetype = 'longdash') +
   scale_size_manual(values = c(2, 1.8, 2)) +
   geom_text(aes(label = .label), size = 1) +
@@ -120,8 +139,8 @@ data <- taxa_trans(profile, taxa, to = 'species', out_all = T, transRA = T)
 group <- read.delim('group.tsv') %>% 
   column_to_rownames('sample')
 
-Maaslin2(data, group, output = 'taxa.masslin2.species', analysis_method = "LM",
-         normalization = 'NONE', transform = 'LOG', correction = 'bonferroni', 
+Maaslin2(data, group, output = 'taxa.masslin2.species', analysis_method = 'LM',
+         normalization = 'NONE', transform = 'LOG', correction = 'BH', 
          fixed_effects = c('group'), save_models = T, save_scatter = T)
 
 maaslin2_out <- read.delim('taxa.masslin2.species/all_results.tsv') %>% 
@@ -132,7 +151,8 @@ maaslin2_out <- read.delim('taxa.masslin2.species/all_results.tsv') %>%
 
 # 系数
 coef_data <- maaslin2_out %>% 
-  select(feature, coef, enriched) %>%
+  add_plab(by = 'qval') %>% 
+  select(feature, coef, enriched, plab) %>%
   mutate(coef = abs(coef),
          feature = sub('CAG ', 'CAG-', feature)) %>% 
   arrange(coef) %>% 
@@ -142,12 +162,15 @@ coef_data <- maaslin2_out %>%
   arrange(desc(enriched))
   
 ggbarplot(coef_data, 'feature', 'coef', fill = 'enriched', rotate = T, 
-          ylab = 'Coefficient', xlab = '', palette = grp_col) + 
+          ylab = 'Coefficient', xlab = '', palette = group_color, 
+          label = coef_data$plab, lab.vjust = .5, lab.size = 3, 
+          lab.col = 'red') + 
   theme(aspect.ratio = 2)
 ggsave('maaslin2.coef.pdf', width = 6, height = 6)
 
 # 热图
 library(ComplexHeatmap)
+
 plot_data <- data[rev(coef_data$feature),] %>% 
   profile_transRA()
 
@@ -161,14 +184,14 @@ col_data <- data.frame(sample = colnames(profile)) %>%
 row_annotation <- row_data %>% 
   column_to_rownames('feature')
 
-annotation_colors <- list(enriched = grp_col)
+annotation_colors <- list(enriched = group_color)
 
 col_split <- factor(col_data$group)
 
 pdf('maaslin2.heatmap.pdf', width = 7, height = 5)
 pheatmap(plot_data, scale = 'row',
-         color = colorRampPalette(c("#4575b4", "#f7f7f7", "#d73027"))(100),
-         border = "#ffffff", border_gp = gpar(col = "#000000"),
+         color = colorRampPalette(c('#4575b4', '#f7f7f7', '#d73027'))(100),
+         border = '#ffffff', border_gp = gpar(col = '#000000'),
          show_rownames = T, show_colnames = T,
          cellwidth = 12, cellheight = 12,
          column_split = col_split, 
@@ -180,13 +203,13 @@ pheatmap(plot_data, scale = 'row',
 dev.off()
 
 #### KO info ####
-grp <- c('Mock','PDCoV')
-grp_col <- structure(c('#a0a0a4','#d7b0b0'), names = grp)
+group_level <- c('Mock','PDCoV')
+group_color <- structure(c('#a0a0a4','#d7b0b0'), names = group_level)
 
 group <- read.delim('group.tsv') %>% 
   select(sample, group)
 
-ko_info <- read.delim('KO_level_A_B_C_D_Description', quote = "")
+ko_info <- read.delim('KO_level_A_B_C_D_Description', quote = '')
 ko_tpm <- read.delim('KO.tpm', row.names = 1) %>% 
   filter(rowSums(.) != 0)
 
@@ -200,7 +223,7 @@ data <- ko_info %>%
   ungroup()
 
 # 旭日图
-levels <- c("lvA", "lvB", "lvC")
+levels <- c('lvA', 'lvB', 'lvC')
 colors <- c('#8dd3c7','#fb8072','#bebada','#80b1d3','#fdb462',
             '#b3de69','#fccde5')
 
@@ -211,9 +234,9 @@ plot_data <- data %>%
   select(lvA, lvB, lvC, n) %>% 
   group_by(lvA, lvB, lvC) %>% 
   arrange(lvA, lvB, lvC, desc(n)) %>% 
-  mutate(lvA = paste0("A ", lvA),
-         lvB = paste0("B ", lvB),
-         lvC = paste0("C ", lvC))
+  mutate(lvA = paste0('A ', lvA),
+         lvB = paste0('B ', lvB),
+         lvC = paste0('C ', lvC))
 
 plot_colors <- plot_data$lvA %>% 
   table(lvA = .) %>% 
@@ -222,14 +245,14 @@ plot_colors <- plot_data$lvA %>%
   add_column(color = colors)
 
 plot_colors <- plot_data %>% 
-  left_join(select(plot_colors, lvA, color), by = "lvA") %>% 
-  gather(key = "level", value = "name", -n, -color) %>% 
+  left_join(select(plot_colors, lvA, color), by = 'lvA') %>% 
+  gather(key = 'level', value = 'name', -n, -color) %>% 
   select(name, color) %>% 
   unique() %>% 
   pull(name = name)
 
 plot_data %>% 
-  gather(key = "level", value = "name", -n) %>%
+  gather(key = 'level', value = 'name', -n) %>%
   mutate(level = factor(level, unique(level)),
          name = factor(name, unique(name))) %>% 
   arrange(level, name) %>%
@@ -246,46 +269,52 @@ plot_data %>%
          prec = ypos / sum(plot_data$n),
          angle = -prec * 360,
          angle = ifelse(angle < 0 & angle > -180, angle + 90, angle - 90),
-         label = ifelse(n > 200, gsub("\\w__", "", name), ""),
-         label = gsub("[ABC] ", "", label)) %>% 
+         label = ifelse(n > 200, gsub('\\w__', '', name), ''),
+         label = gsub('[ABC] ', '', label)) %>% 
   ggplot() +
   geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = name),
-            color = "white", linewidth = .1) +
+            color = 'white', linewidth = .1) +
   geom_text(aes(x = xpos, y = ypos, label = label, angle = angle), size = 2.2) +
   scale_fill_manual(values = plot_colors) +
-  labs(caption = "A total of 7,004 KOs") +
-  coord_polar(theta = "y") +
+  labs(caption = 'A total of 7,004 KOs') +
+  coord_polar(theta = 'y') +
   theme_void() +
-  theme(legend.position = "none") 
+  theme(legend.position = 'none') 
 ggsave('KO.annotation.pdf', width = 9, height = 9)
 
 #### KO alpha ####
-source("/code/R_func/diversity.R") 
+source('/code/R_func/diversity.R') 
 
 map(c('shannon', 'richness'), ~
       calcu_alpha(ko_tpm, method = .x) %>% 
-      left_join(group, by = "sample") %>% 
-      mutate(group = factor(group, grp)) %>% 
-      ggboxplot("group", "value", fill = "group", palette = grp_col, 
-                legend = "none", outlier.size = 1, xlab = "", 
+      left_join(group, by = 'sample') %>% 
+      mutate(group = factor(group, group_level)) %>% 
+      ggboxplot('group', 'value', fill = 'group', palette = group_color, 
+                legend = 'none', outlier.size = 1, xlab = '', 
                 ylab = paste0(.x, ' index')) +
-      stat_compare_means(comparisons = list(grp), label = "p.signif", 
+      stat_compare_means(comparisons = list(group_level), label = 'p.signif', 
                          step.increase = .06, vjust = .7, tip.length = .02) +
       theme(aspect.ratio = 2) ) %>% 
   cowplot::plot_grid(plotlist = ., nrow = 1, align = 'v')
-ggsave("KO.div.alpha.pdf", width = 4, height = 3)
+ggsave('KO.div.alpha.pdf', width = 4, height = 3)
+
+# effect size
+map_dfr(c('shannon', 'richness'), ~
+          calcu_alpha(profile, method = .x) %>%
+          left_join(group, by = 'sample') %>% 
+          mutate(name = .x) ) %>% 
+  group_by(name) %>% 
+  wilcox_effsize(value ~ group, ref.group = 'Mock')
 
 #### KO PCoA ####
-source("/code/R_func/plot_PCoA.R")
+source('/code/R_func/plot_PCoA.R')
 
-plot_PCoA(ko_tpm, group, group_order = grp, group_color = grp_col, 
-          add_group_label = T, lab_size = 3, ellipse_level = .9, 
+plot_PCoA(ko_tpm, group, group_level = group_level, group_color = group_color, 
+          add_group_label = T, label_size = 3, ellipse_level = .9, 
           show_legend = F, show_grid = T, show_line = F)
-ggsave("KO.div.PCoA.pdf", width = 4, height = 3)
+ggsave('KO.div.PCoA.pdf', width = 4, height = 3)
 
 #### KO_lvB compos ####
-source('/code/R_func/calcu_stamp.R')
-
 path_tpm <- ko_tpm %>% 
   mutate(lvBdes = ko_info$lvBdes[match(rownames(.), ko_info$lvD)]) %>% 
   aggregate(. ~ lvBdes, ., sum) %>% 
@@ -294,14 +323,21 @@ path_tpm <- ko_tpm %>%
 diff <- difference_analysis(path_tpm, group, add_enriched = T,
                             comparison = c('PDCoV', 'Mock')) %>% 
   mutate(category = ko_info$lvAdes[match(name, ko_info$lvBdes)], .after = 1)
-
 write.xlsx(diff, 'KO_lvB.rela_ab.diff.xlsx')
+
+data <- path_tpm %>% 
+  rownames_to_column('name') %>% 
+  gather('sample', 'value', -name) %>% 
+  left_join(group, by = 'sample') %>% 
+  group_by(name) %>% 
+  wilcox_effsize(value ~ group)
+write.xlsx(data, 'KO_lvB.rela_ab.diff.effect_size.xlsx')
 
 # heatmap
 row_data <- data.frame(name = rownames(path_tpm)) %>% 
   mutate(lvAdes = ko_info$lvAdes[match(name, ko_info$lvBdes)]) %>% 
-  filter(lvAdes %in% c("Metabolism","Environmental Information Processing",
-                       "Cellular Processes", "Genetic Information Processing",
+  filter(lvAdes %in% c('Metabolism','Environmental Information Processing',
+                       'Cellular Processes', 'Genetic Information Processing',
                        'Organismal Systems','Brite Hierarchies'))
 col_data <- data.frame(name = colnames(path_tpm)) %>% 
   left_join(group, by = c('name' = 'sample'))
@@ -312,7 +348,7 @@ col_annotation <- col_data %>% column_to_rownames('name')
 colors <- list(lvAdes = structure(c('#a6cee2','#b1df89','#fa9a99','#c9b1d5',
                                     '#fcc681','#fccde5'),
                                   names = unique(row_data$lvAdes)),
-               group = grp_col)
+               group = group_color)
 
 row_split <- factor(row_annotation$lvAdes)
 col_split <- factor(col_annotation$group)
@@ -320,88 +356,36 @@ col_split <- factor(col_annotation$group)
 data <- filter(path_tpm, rownames(path_tpm) %in% row_data$name)
 
 pdf('KO_lvB.rela_ab.heatmap.pdf', width = 10, height = 6)
-pheatmap(data, scale = "row",
-         color = paletteer::paletteer_c("grDevices::Temps", 30),
+pheatmap(data, scale = 'row',
+         color = paletteer::paletteer_c('grDevices::Temps', 30),
          split = row_split, column_split = col_split,
-         column_gap = unit(1, "mm"), row_gap = unit(1, "mm"),
+         column_gap = unit(1, 'mm'), row_gap = unit(1, 'mm'),
          cluster_rows = T, cluster_cols = T,
-         border_color = 'white', border_gp = gpar(col = "black"),
+         border_color = 'white', border_gp = gpar(col = 'black'),
          show_rownames = T, show_colnames = F,
          cellwidth = 12, cellheight = 8,
          treeheight_col = 30, treeheight_row = 30,
          fontsize_col = 8,  fontsize_row = 7,
          annotation_col = col_annotation, annotation_row = row_annotation,
-         annotation_colors = colors, annotation_names_col = T )
+         annotation_colors = colors, annotation_names_col = T)
 dev.off()
 
-# composition
-colors <- c("#4E79A7","#A0CBE8","#F28E2B","#FFBE7D","#59A14F","#8CD17D",
-            "#B6992D","#F1CE63","#499894","#86BCB6","#E15759","#FF9D9A","#79706E")
+# stamp
+source('/code/R_func/plot_stamp.R')
+data <- calcu_stamp(path_tpm, group, comparison = c('PDCoV', 'Mock'), method = 'wilcox')
 
-# metabolism
-.names <- filter(diff, category == "Metabolism") %>% pull(name)
-
-data <- filter(path_tpm, rownames(path_tpm) %in% .names)
-
-plot_compos_manual(data, group, taxa_color = colors, group_order = grp,
-                   plot_title = 'Metabolism') +
-  theme(aspect.ratio = 2.4)
-ggsave("KO_lvB.compos.metabolism.pdf", width = 6, height = 4)
-
-# Environmental
-.names <- filter(diff, category == "Environmental Information Processing") %>% 
-  pull(name)
-
-data <- filter(path_tpm, rownames(path_tpm) %in% .names)
-
-plot_compos_manual(data, group, taxa_color = colors, group_order = grp,
-                   plot_title = 'Environmental') +
-  theme(aspect.ratio = 2.4)
-ggsave('KO_lvB.compos.Environmental.pdf', width = 6, height = 4)
-
-# Genetic Information Processing
-.names <- filter(diff, category == "Genetic Information Processing") %>% 
-  pull(name)
-
-data <- filter(path_tpm, rownames(path_tpm) %in% .names)
-
-plot_compos_manual(data, group, taxa_color = colors, group_order = grp,
-                   plot_title = 'Genetic') +
-  theme(aspect.ratio = 2.4)
-ggsave("KO_lvB.compos.Genetic.pdf", width = 6, height = 4)
-
-# Cellular Processes
-.names <- filter(diff, category == "Cellular Processes") %>% 
-  pull(name)
-
-data <- filter(path_tpm, rownames(path_tpm) %in% .names)
-
-plot_compos_manual(data, group, taxa_color = colors, group_order = grp,
-                   plot_title = 'Cellular') +
-  theme(aspect.ratio = 2.4)
-ggsave('KO_lvB.compos.Cellular.pdf', width = 6, height = 4)
-
-# combine
 .names <- diff %>% 
-  filter(pval < 0.05) %>% 
   filter(category %in% c('Cellular Processes','Metabolism',
                          'Environmental Information Processing',
                          'Genetic Information Processing')) %>% 
   pull(name)
 
-data <- ko_tpm %>% 
-  mutate(lvBdes = ko_info$lvBdes[match(rownames(.), ko_info$lvD)]) %>% 
-  aggregate(. ~ lvBdes, ., sum) %>% 
-  column_to_rownames('lvBdes') %>% 
-  filter(rownames(.) %in% .names)
-
-calcu_stamp(data, group, comparison = c('PDCoV', 'Mock'), method = 'wilcox') %>% 
-  filter(pval < 0.05) %>% 
+filter(data, padj < 0.05 & name %in% .names) %>% 
+  add_plab(by = 'padj') %>% 
   plot_stamp(top_n = 100, comparison = c('PDCoV', 'Mock'), 
              palette = c('#d7b0b0', '#a0a0a4'), left_title = '', 
              left_xlab = 'mean TPM', middle_title = '', 
              middle_xlab = '95% confidence intervals\nestimate of the location parameter')
-
 ggsave('KO_lvB.rela_ab.diff.pdf', width = 10, height = 8)
 
 #### BSH BaiCD ####
@@ -415,9 +399,9 @@ ko_tpm[c('K01442', 'K15870'),] %>%
   select(-sample) %>% 
   filter(!is.na(group)) %>% 
   gather('gene', 'value', -group) %>% 
-  ggboxplot('group', 'value', fill = 'group', palette = grp_col, legend = 'none') +
+  ggboxplot('group', 'value', fill = 'group', palette = group_color, legend = 'none') +
   facet_wrap(~ gene, scale = 'free') +
-  stat_compare_means(comparisons = list(grp), method = 'wilcox', 
+  stat_compare_means(comparisons = list(group_level), method = 'wilcox', 
                      label = 'p.signif') +
   theme(aspect.ratio = 1.8,
         strip.background = element_blank())
@@ -434,21 +418,44 @@ ko_tpm[c('K01442', 'K15870'),] %>%
   group_by(gene) %>% 
   wilcox_test(value ~ group)
 
+ko_tpm[c('K01442', 'K15870'),] %>% 
+  t %>% 
+  data.frame() %>% 
+  rownames_to_column('sample') %>% 
+  left_join(group, by = 'sample') %>% 
+  filter(!is.na(group)) %>% 
+  select(-sample) %>% 
+  gather('gene', 'value', -group) %>% 
+  group_by(gene) %>% 
+  wilcox_effsize(value ~ group)
+
 #### correlation ####
+# ko_tpm <- read.delim('KO.tpm', row.names = 1) %>% 
+#   filter(rowSums(.) != 0)
+
 metadata <- read.delim('viral_loads.txt', row.names = 1)
 
-group <- read.delim("group.tsv")
+# psych::corr.test(t(ko_tpm[c('K05349','K05350'), rownames(metadata)]),
+#                  metadata, method = 'spearman', adjust = 'none')
+# 
+# psych::corr.test(t(ko_tpm[c('K26172','K26173','K26174'), rownames(metadata)]),
+#                  metadata, method = 'spearman', adjust = 'none')
+# 
+# psych::corr.test(t(ko_tpm[c('K05989'), rownames(metadata)]),
+#                  metadata, method = 'spearman', adjust = 'none')
 
-cvg <- read.delim("species.cvg", row.names = 1, check.names = F) %>% 
+group <- read.delim('group.tsv')
+
+cvg <- read.delim('species.cvg', row.names = 1, check.names = F) %>% 
   apply(2, \(x) ifelse(x < .1, 0, 1))
 
-profile <- cvg * read.delim("species.tpm", row.names = 1, check.names = F)
+profile <- cvg * read.delim('species.tpm', row.names = 1, check.names = F)
 
 profile <- apply(profile, 2, \(x) x/sum(x) * 100) %>% 
   data.frame() %>% 
   select(all_of(group$sample))
 
-taxa <- read.delim("gtdbtk.tsv")
+taxa <- read.delim('gtdbtk.tsv')
 
 .names <- read.delim('taxa.masslin2.species/all_results.tsv') %>% 
   filter(pval < 0.05) %>% 
@@ -465,7 +472,7 @@ taxa <- read.delim("gtdbtk.tsv")
 data <- taxa_trans(profile, taxa, to = 'species', out_all = T) %>% 
   filter(rownames(.) %in% .names)
 
-corr <- psych::corr.test(t(data), metadata)
+corr <- psych::corr.test(t(data), metadata, adjust = 'BH')
 
 r_data <- data.frame(t(corr$r), check.names = F) %>% 
   rownames_to_column('name') %>% 
@@ -489,15 +496,15 @@ nodes <- data.frame(node = unique(c(edges$from, edges$to))) %>%
 
 g <- tbl_graph(nodes = nodes, edges = edges)
 
-colors <- c("#8dd3c7","#bebada","#fb8072","#80b1d3","#fdb462",
-            "#b3de69","#fccde5","#bc80bd","#ffed6f","grey77")
+colors <- c('#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462',
+            '#b3de69','#fccde5','#bc80bd','#ffed6f','grey77')
 
 ggraph(g, layout = 'linear', circular = T) +
   geom_edge_arc(aes(edge_width = rval, edge_linetype = direct, 
                     edge_colour = direct), strength = .2) +
   scale_edge_linetype_manual(values = c(2, 1)) +
   scale_edge_width(range = c(.5, .8)) +
-  scale_edge_color_manual(values = c("#7fc97f","#fdc086")) +
+  scale_edge_color_manual(values = c('#7fc97f','#fdc086')) +
   geom_node_point(aes(color = phylum, shape = type), size = 3) +
   scale_shape_manual(values = c(16, 15)) +
   scale_color_manual(values = colors) +
