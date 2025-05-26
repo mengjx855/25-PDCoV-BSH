@@ -1,0 +1,215 @@
+---
+title: "Non-target and Bile acid-target metabolomic analyses"
+author: "Jinxin Meng"
+date: "2025-05-26"
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+
+```
+
+## environment option
+``` {R message = F}
+pacman::p_load(tidyr, dplyr, tibble, purrr, ggpubr, rstatix)
+pacman::p_load(ropls, clusterProfiler, ComplexHeatmap)
+source('/code/R_func/difference_analysis.R')
+source('/code/R_func/calcu_diff.R')
+source('/code/R_func/plot_PLS.R')
+```
+
+## non-target input data
+```{R}
+group_level <- c('Mock','PDCoV')
+group_color <- structure(c('#a0a0a4','#d7b0b0'), names = group_level)
+
+MBT_info <- read.delim('NonTarget_MBT_info.tsv')
+group <- read.delim('NonTarget_group.tsv')
+profile <- read.delim('NonTarget_MBT_profile.tsv', row.names = 1) %>% 
+  select(all_of(group$sample))
+```
+
+## PLS analysis
+- corresponding to Fig. 3A
+```{R warning = F}
+plot_PLS(profile, group, group_level = group_level, group_color = group_color,
+         add_group_label = T,  label_size = 3, ellipse_level = .9, 
+         show_legend = F, show_grid = T, show_line = F)
+```
+
+## different expression metabolite analysis
+- corresponding to Fig. 3B
+```{R message = F, fig.show='hide'}
+plsda <- opls(data.frame(t(log10(profile))), y = pull(group, group), orthoI = 0)
+diff <- difference_analysis(log10(profile), group, comparison = c('PDCoV', 'Mock'), 
+                            method = 't')
+
+diff <- data.frame(plsda_vip = plsda@vipVn) %>% 
+  rownames_to_column('name') %>% 
+  left_join(diff, ., by = 'name') %>% 
+  mutate(enriched = ifelse((plsda_vip > 1 & padj < 0.05) & log2FC > 0, 'PDCoV', 
+                           ifelse((plsda_vip > 1 & padj < 0.05) & log2FC < 0, 
+                                  'Mock', 'none'))) %>% 
+  left_join(MBT_info, c('name' = 'cpd_id'))
+```
+
+## volcano visualization
+- corresponding to Fig. 3B
+```{R}
+plot_data <- diff %>% 
+  select(name, cpd_name, padj, log2FC, enriched, plsda_vip) %>% 
+  mutate(.enriched = ifelse(is.na(enriched), 'none', enriched),
+         .padj = -log10(padj),
+         .log2FC = log2FC,
+         .log2FC = ifelse(.log2FC < -5, -5, .log2FC),
+         .log2FC = ifelse(.log2FC > 2.5, 2.5, .log2FC),
+         .vip = ifelse(plsda_vip > 1, plsda_vip, .8))
+
+ggscatter(plot_data, '.log2FC', '.padj', color = '.enriched', size = '.vip', 
+          xlab = 'log2FoldChange', ylab = '-log10 BH-adjusted P-value', legend = 'right',
+          palette = c(group_color, 'none' = 'grey78')) +
+  scale_size_continuous(range = c(1, 2.5)) +
+  geom_hline(yintercept = -log10(0.05), linetype = 'longdash') +
+  geom_vline(xintercept = c(0), linetype = 'longdash') +
+  theme(aspect.ratio = 1)
+```
+
+## KEGG pathway enrichment analysis
+- corresponding to Fig. 3C
+```{R fig.width=12,fig.height=5}
+path_info <- read.delim('cpd2path_enrichment.tsv')
+
+eKEGG <- diff %>% 
+  filter(enriched != 'none') %>% 
+  filter(KEGG != '') %>% 
+  pull(KEGG) %>% 
+  map(~ unlist(strsplit(.x, ';'))) %>% 
+  flatten_chr() %>% 
+  enricher(TERM2GENE = path_info, minGSSize = 1, pvalueCutoff = 1, qvalueCutoff = 1) %>% 
+  data.frame
+
+path_name <- c('map00970','map00120','map01230','map01064','map00250',
+               'map05230','map00470','map04974','map04080','map00600')
+
+plot_data <- eKEGG %>%
+  mutate(path = map_vec(strsplit(ID, ':'), \(x) x[1])) %>% 
+  filter(path %in% path_name) %>% 
+  arrange(FoldEnrichment)
+
+ggscatter(plot_data, 'ID', 'FoldEnrichment', fill = 'p.adjust', 
+          rotate = T, size = 'FoldEnrichment',
+          shape = 21, legend = 'right', xlab = '', ylab = 'Fold Enrichment') +
+  scale_fill_viridis_c(begin = .6) +
+  scale_size_continuous(range = c(3, 6)) +
+  theme(aspect.ratio = 2, 
+        panel.grid.major = element_line(linewidth = .5, color = 'grey88'))
+
+```
+
+## bile acid abundance heatmap
+- corresponding to Fig. 3D
+```{R}
+group_level <- c('Mock','PDCoV')
+group_color <- structure(c('#a0a0a4','#d7b0b0'), names = group_level)
+
+profile <- read.delim('BA_data.txt', sep = '\t', row.names = 1)
+
+group <- data.frame(sample = colnames(profile)) %>% 
+  mutate(group = gsub('\\d+', '', sample))
+
+col_data <- data.frame(name = colnames(profile)) %>% 
+  left_join(group, by = c('name' = 'sample'))
+
+col_split <- factor(col_data$group)
+
+pheatmap(log10(profile), scale = 'row',
+         cellwidth = 10,cellheight = 10,
+         colorRampPalette(c('#3288bd', '#ffffff', '#d53e4f'))(100),
+         fontsize_col = 8, fontsize_row = 8,
+         treeheight_col = 0, treeheight_row = 0,
+         border = '#ffffff', border_gp = gpar(col = '#000000'),
+         column_split = col_split,
+         column_gap = unit(1, 'mm'))
+```
+
+## bile acid abundance boxplot
+- corresponding to Fig. 3E
+```{R message = F, warning = F, figwidth=12, fig.height=4}
+info <- data.frame(name = c('CA','CDCA','HCA','DCA','LCA','UDCA','HDCA','GCA',
+                            'TCA','GCDCA','TCDCA','GHCA','THCA','THDCA','GUDCA',
+                            'TUDCA','GDCA','TDCA','GLCA','TLCA'), 
+                   class = c(rep('Primary', 3), rep('Secondary', 4), rep('Conjugated', 13)))
+
+data <- profile %>% 
+  rownames_to_column('name') %>% 
+  gather('sample', 'value', -name) %>% 
+  left_join(group, by = 'sample') %>% 
+  mutate(.value = log10(value))
+
+data %>% 
+  group_by(name) %>% 
+  rstatix::shapiro_test(.value)
+
+median <- data %>% 
+  group_by(name, group) %>% 
+  summarise(median = median(value)) %>% 
+  spread('group', 'median') %>% 
+  mutate(diff = ifelse(PDCoV > Mock, PDCoV / Mock, Mock / PDCoV)) %>% 
+  select(name, median = diff)
+
+.level <- data %>% 
+  group_by(name) %>% 
+  rstatix::anova_test(.value ~ group, detailed = T) %>% 
+  ungroup() %>% 
+  data.frame() %>% 
+  rstatix::add_significance('p') %>% 
+  left_join(info, by = 'name') %>%
+  mutate(class = factor(class, c('Primary', 'Secondary','Conjugated'))) %>% 
+  left_join(median, by = 'name') %>% 
+  arrange(class, desc(median))
+
+plot_data <- data %>% 
+  mutate(name = factor(name, .level$name))
+
+ggboxplot(plot_data, 'name', '.value', fill = 'group', palette = group_color, width = .6,
+          outlier.shape = NA, xlab = '', ylab = 'log10 content', legend = 'none',
+          x.text.angle = 45) +
+  annotate('text', x = c(1, 4, 5, 10, 12), y = c(3, 2.5, 2.8, 1, 2), 
+           label = c('**', '**', '*', '**', '*'), color = 'red') +
+  annotate('segment', x = .75, xend = 1.25, y = 2.9) +
+  annotate('segment', x = 3.75, xend = 4.25, y = 2.4) +
+  annotate('segment', x = 4.75, xend = 5.25, y = 2.7) +
+  annotate('segment', x = 9.75, xend = 10.25, y = .9) +
+  annotate('segment', x = 11.75, xend = 12.25, y = 1.9) +
+  theme(axis.ticks.length = unit(2, 'mm'))
+```
+
+## bile acid correlated with bacterial species
+- corresponding to Fig. 3I
+```{R}
+MGX_profile <- read.delim('species_data.txt', sep = '\t', row.names = 1)
+MBX_profile <- read.delim('BA_data.txt', sep = '\t', row.names = 1)
+
+corr <- psych::corr.test(t(MGX_profile), t(MBX_profile), method = 'spearman', 
+                         adjust = 'BH')
+r_data <- data.frame(t(corr$r), check.names = F)
+p_data <- data.frame(t(corr$p), check.names = F)
+
+plot_label <- apply(p_data, 2, \(x) ifelse(x < 0.01, '**', ifelse(x < 0.05, '*', '')))
+plot_label <- plot_label[(apply(plot_label, 1, \(x) sum(x != '')) != 0),]
+r_data <- r_data[rownames(plot_label),]
+
+pheatmap((r_data),
+         cluster_rows = T, cluster_cols = T,
+         border = '#ffffff', border_gp = gpar(col = '#000000'),
+         show_rownames = T, show_colnames = T,
+         cellwidth = 10,cellheight = 10,
+         treeheight_col = 0, treeheight_row = 0,
+         fontsize_col = 8, fontsize_row = 8,
+         display_numbers = (plot_label),
+         fontface_col = 'italic')
+```
